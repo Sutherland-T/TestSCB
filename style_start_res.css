@@ -1,0 +1,147 @@
+/* General styling for both .startlist and .results */
+.startlist, .results {
+  font-size: 30px;
+  background-color: transparent;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Content container */
+.startlist #content, .results #content {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+}
+
+/* Hide the race clock for both .startlist and .results */
+.startlist #raceClock, .results #raceClock {
+  display: none;
+}
+
+/* Common styles for event and subtitle sections */
+.startlist .event-class, .results .event-class,
+.startlist .subtitle-class, .results .subtitle-class {
+  background-color: rgba(139,0,0,1.0);
+  color: gold;
+  font-size: 2.5rem;
+  text-align: left;
+  text-indent: 30px;
+  margin: 0;
+  width: 1000px;
+  height: 60px;
+}
+
+/* Border radius for event and subtitle sections */
+.startlist .event-class, .results .event-class {
+  border-radius: 10px 10px 0 0;
+}
+
+.startlist .subtitle-class, .results .subtitle-class {
+  border-radius: 0 0 0 0;
+}
+
+/* Table styles for both .startlist and .results */
+.startlist #athletesTable, .results #athletesTable {
+  width: 1000px;
+  margin: 0px;
+  padding: 0px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 10px;  /* horizontal vertical */
+}
+
+/* Event wrapper styles for both .startlist and .results */
+.startlist .event-wrapper, .results .event-wrapper {
+  position: relative;
+  bottom: 0px;
+  left: 10px;
+  width: 1000px;
+  padding: 0px;
+  margin: auto;
+  float: left;
+}
+
+.startlist #stateTitle, .results #stateTitle {
+  font-size: 40px;
+  text-align: center; /* Center the text */
+  margin-left: 10px;
+  width: 1000px; /* Same width as .event-wrapper */
+  float: left;
+  background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1),rgba(255,255,255,0));
+  color: black;
+}
+
+/* Common styles for table headers */
+.startlist #athletesTable th, .results #athletesTable th {
+  background-color: rgba(139,0,0,1.0);
+  color: gold;
+  font-size: 2rem;
+  padding: 0px;
+}
+
+/* Common styles for table rows and cells */
+.startlist #athletesTable tr, .results #athletesTable tr,
+.startlist #athletesTable td, .results #athletesTable td {
+  height: 60px;
+  font-size: 2rem;
+  overflow: hidden;
+}
+
+/* Column-specific styles for lane and place columns */
+.startlist .column-lane, .results .column-lane,
+.startlist .column-place, .results .column-place {
+  width: 100px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.startlist #athletesTable tbody tr td.column-lane, .results #athletesTable tbody tr td.column-lane,
+.startlist #athletesTable tbody tr td.column-place, .results #athletesTable tbody tr td.column-place {
+  background-color: rgba(139,0,0,1.0);
+  color: gold;
+}
+
+/* Common styles for the name, team, and time columns */
+.startlist .column-name, .results .column-name,
+.startlist .column-team, .results .column-team,
+.startlist .column-time, .results .column-time {
+  text-align: left;
+}
+
+.startlist .column-name, .results .column-name {
+  width: 500px;
+  text-indent: 20px;
+}
+
+.startlist .column-team, .results .column-team {
+  width: 150px;
+}
+
+.startlist .column-time, .results .column-time {
+  width: 150px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+/* Variable cell background colors */
+.startlist .cell-with-variable, .results .cell-with-variable {
+  background-color: rgba(173, 216, 230, 1.0);
+}
+
+.startlist .cell-without-variable, .results .cell-without-variable {
+  background-color: transparent;
+}
+
+/* To make the cell background transparent for the 'place' column */
+.startlist #athletesTable tbody tr td.column-place.cell-with-variable, .results #athletesTable tbody tr td.column-place.cell-with-variable {
+  background-color: rgba(139,0,0,1.0);
+}
+
+/* To make the cell background transparent for the 'place' column */
+.startlist #athletesTable tbody tr td.column-place.cell-without-variable, .results #athletesTable tbody tr td.column-place.cell-without-variable {
+  background-color: transparent;
+}
+

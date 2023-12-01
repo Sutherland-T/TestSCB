@@ -1,0 +1,157 @@
+/* General styling */
+html {
+  font-size: 16px; /* setting root font-size */
+  background-color: transparent;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Shared styles for in_progress and #content */
+.in_progress, .in_progress #content {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+}
+
+/* Clock Section */
+.in_progress #raceClock {
+  background-color: rgba(139,0,0,0.9);
+  color: gold;
+  font-size: 2rem;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  text-align: right;
+  position: absolute;
+  width: 180px;
+  bottom: 25px;
+  right: 0;
+  margin: 0 10px 0 0;
+  padding: 0 10px 0 0;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Common styles for event and subtitle sections */
+.in_progress .event-class, .in_progress .subtitle-class {
+  background-color: rgba(139,0,0,0.9);
+  color: gold;
+  font-size: 1.5rem;
+  text-align: left;
+  margin: 0;
+  padding: 0 0 20px 10px;
+  width: 270px;
+  height: 25px;
+}
+
+/* Border radius for event and subtitle sections */
+.in_progress .event-class {
+  border-radius: 10px 10px 0 0;
+}
+
+.in_progress .subtitle-class {
+  border-radius: 0 0 0 0;
+}
+
+/* Table styles for in_progress and athletesTable */
+.in_progress #athletesTable, .in_progress #athletesTable {
+  width: 280px;
+  margin: 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* horizontal vertical */
+}
+
+/* Event wrapper styles for in_progress and event-wrapper */
+.in_progress .event-wrapper {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 270px;
+  padding: 5px;
+  margin: 0;
+}
+
+/* Hide State */
+.in_progress #stateTitle {
+  display: none;
+}
+
+/* Common styles for table headers and cells */
+.in_progress #athletesTable th, .in_progress #athletesTable td {
+  height: 30px;
+  font-size: 1.5rem;
+  overflow: hidden;
+}
+
+/* Common styles for table headers */
+.in_progress #athletesTable th {
+  background-color: rgba(139,0,0,0.9);
+  color: gold;
+  font-size: 1.5rem;
+}
+
+/* Fixed row height for table rows */
+.in_progress #athletesTable tr {
+  height: 60px;
+}
+
+/* Column-Specific Styling */
+.in_progress .column-lane, .in_progress .column-place {
+  width: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.in_progress #athletesTable tbody tr td.column-lane,
+.in_progress #athletesTable tbody tr td.column-place {
+  background-color: rgba(139,0,0,0.9);
+  color: gold;
+}
+
+/* Common styles for name, team, and time columns */
+.in_progress .column-name,
+.in_progress .column-team,
+.in_progress .column-time {
+  text-align: left;
+}
+
+.in_progress .column-name {
+  width: 100px;
+}
+
+/* New class for team column */
+.in_progress .column-team {
+  width: 100px;
+}
+
+/* New class for time column */
+.in_progress .column-time {
+  width: 90px;
+  text-align: right;
+}
+
+/* Variable Cell Colors */
+.in_progress .cell-with-variable {
+  background-color: rgba(173, 216, 230, 0.9);
+}
+
+/* Variable Cell Colors */
+.in_progress .cell-without-variable {
+  background-color: transparent;
+}
+
+/* To make the cell background transparent for the 'place' column */
+.in_progress #athletesTable tbody tr td.column-place.cell-with-variable {
+  background-color: rgba(139,0,0,0.9);
+}
+
+/* To make the cell background transparent for the 'place' column */
+.in_progress #athletesTable tbody tr td.column-place.cell-without-variable {
+  background-color: transparent;
+}
