@@ -1,25 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="./style_start_res.css">
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@900&display=swap" rel="stylesheet">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
-        <title>Data Viewer</title>
-        <script>
-            var laneOrder = 'ascending'; // Set this value as needed for lanes 1 to n 'ascending' or n to 1 'descending'
-        </script>          
-    </head>
-    <body>
-        <h1 id="stateTitle"></h1>        
-        <div id="content">  
-            <h1 id="raceClock">0.0</h1>          
-        </div> <!-- Container for other data -->
-        <script src="script.js"></script> <!-- Reference to the external JavaScript file -->
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="normalise.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Dynamic Race Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- {{ raceData }}</pre>  -->
+        <div :class="raceData.state">
+        <!--    <h1 v-if="raceData.state === 'startlist'">Start List<span style="margin-left: 60%;">{{ raceData.race_time }}</span></h1> 
+                <h1 v-else-if="raceData.state === 'in_progress'">Race In Progress<span style="margin-left: 200px;">{{ raceData.race_time }}</span></h1>
+                <h1 v-else-if="raceData.state === 'race_finish'">Race Finished<span style="margin-left: 100px;">{{ raceData.race_time }}</span></h1>    -->
+            <h1 v-if="raceData.state === 'startlist'" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Start List</span>
+                <span>{{ raceData.race_time }}</span>
+            </h1>
+            <h1 v-if="raceData.state === 'in_progress'" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Race In Progress</span>
+                <span>{{ raceData.race_time }}</span>
+            </h1>
+            <h1 v-if="raceData.state === 'race_finish'" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Race Finishing</span>
+                <span>{{ raceData.race_time }}</span>
+            </h1>
+            <h1 v-else-if="raceData.state === 'official'">Results</h1>
+            <h1 v-else-if="raceData.state === 'results'">Event Summary</h1> 
+            
+            <!-- Display different data based on state -->
+            <div v-if="raceData.state === 'startlist'">
+                <!-- Startlist specific content -->
+                <!-- Display EventTitle -->
+                <h2 v-if="raceData.parsed_data && raceData.parsed_data.EventTitle">
+                    {{ raceData.parsed_data.EventTitle.Title }} <br>
+                    {{ raceData.parsed_data.EventTitle.Records }}
+                </h2>
+
+                <!-- Table for Lane Data -->
+                <table v-if="raceData.parsed_data && raceData.parsed_data.Lanes && Object.keys(raceData.parsed_data.Lanes).length > 0">
+                    <thead>
+                        <tr>
+                            <th>Lane</th>
+                            <th>Name</th>
+                            <th>Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(lane, laneNumber) in raceData.parsed_data.Lanes" :key="laneNumber">
+                            <td>{{ lane.Lane }}</td>
+                            <td>{{ lane.Name }} <br> <span style="font-weight:100;">{{ lane.Swimmers }}</span></td>
+                            <td>{{ lane.Nationality }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-else>
+                    <p>No lane data available.</p>
+                </div>
+            </div>
+            <div v-else-if="raceData.state === 'in_progress'">
+                <!-- In-progress specific content -->
+                <!-- Display EventTitle and Records -->
+                <h2 v-if="raceData.parsed_data && raceData.parsed_data.EventTitle">
+                    {{ raceData.parsed_data.EventTitle.Title }} <br>
+                    {{ raceData.parsed_data.EventTitle.Records }}
+                </h2>
+                <!-- Table for Lane Data in In-Progress State -->
+                <table v-if="raceData.parsed_data && raceData.parsed_data.Lanes && Object.keys(raceData.parsed_data.Lanes).length > 0">
+                    <thead>
+                        <tr>
+                            <th>Lane</th>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Split</th>
+                            <th>Time</th>
+                            <th>Place</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(lane, laneNumber) in raceData.parsed_data.Lanes" :key="laneNumber">
+                            <td>{{ lane.Lane }}</td>
+                            <td :style="cellStyle(lane.Name)">{{ lane.Name }}<br><span style="font-weight:100;">{{ lane.RelaySwimmer }}</span></td>
+                            <td>{{ lane.Nationality }}</td>
+                            <td>{{ lane.LapTime.slice().reverse().find(time => time !== null) }}</td>
+                            <td>{{ lane.Time }}</td>
+                            <td>{{ lane.Rank }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-else>
+                    <p>No lane data available.</p>
+                </div>
+            </div>
+            <div v-else-if="raceData.state === 'race_finish'">
+                <!-- Race-finish specific content -->
+                <!-- Display EventTitle and Records -->
+                <h2 v-if="raceData.parsed_data && raceData.parsed_data.EventTitle">
+                    {{ raceData.parsed_data.EventTitle.Title }} <br>
+                    {{ raceData.parsed_data.EventTitle.Records }}
+                </h2>
+
+                <!-- Table for Lane Data in race_finish State -->
+                <table v-if="raceData.parsed_data && raceData.parsed_data.Lanes && Object.keys(raceData.parsed_data.Lanes).length > 0">
+                    <thead>
+                        <tr>
+                            <th>Lane</th>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Split</th>
+                            <th>Time</th>
+                            <th>Place</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(lane, laneNumber) in raceData.parsed_data.Lanes" :key="laneNumber">
+                            <td>{{ lane.Lane }}</td>
+                            <td>{{ lane.Name }}<br><span style="font-weight:100;">{{ lane.RelaySwimmer }}</span></td>
+                            <td>{{ lane.Nationality }}</td>
+                            <td>{{ lane.LapTime.slice().reverse().find(time => time !== null) }}</td>
+                            <td>{{ lane.Time }}</td>
+                            <td>{{ lane.Rank }}<br>{{ lane.Note }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-else>
+                    <p>No lane data available.</p>
+                </div>
+            </div>
+            <div v-else-if="raceData.state === 'official'">
+                <!-- Results official specific content -->
+                <!-- Display EventTitle and Records -->
+                <h2 v-if="raceData.parsed_data && raceData.parsed_data.EventTitle">
+                    {{ raceData.parsed_data.EventTitle.Title }} <br>
+                    {{ raceData.parsed_data.EventTitle.Records }}
+                </h2>
+
+                <!-- Table for Lane Data in offical State -->
+                <table v-if="raceData.parsed_data && raceData.parsed_data.Lanes && Object.keys(raceData.parsed_data.Lanes).length > 0">
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Time</th>
+                            <th>Lane</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(lane, laneNumber) in raceData.parsed_data.Lanes" :key="laneNumber">
+                            <td>{{ lane.Rank }}</td>
+                            <td>{{ lane.Name }}<br><span style="font-weight:100;">{{ lane.Swimmers }}</span></td>
+                            <td>{{ lane.Nationality }}</td> 
+                            <td>{{ lane.Time }} <br> {{ lane.Note }}</td>
+                            <td>{{ lane.Lane }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-else>
+                    <p>No lane data available.</p>
+                </div>
+            </div>
+            <div v-else-if="raceData.state === 'results'">
+                <!-- Results official specific content -->
+                <!-- Display EventTitle and Records -->
+                <h2 v-if="raceData.parsed_data && raceData.parsed_data.EventTitle">
+                    {{ raceData.parsed_data.EventTitle.Title }} <br>
+                    {{ raceData.parsed_data.EventTitle.Records }}
+                </h2>
+
+                <!-- Table for Lane Data in offical State -->
+                <table v-if="raceData.parsed_data && raceData.parsed_data.Lanes && Object.keys(raceData.parsed_data.Lanes).length > 0">
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(lane, laneNumber) in raceData.parsed_data.Lanes" :key="laneNumber">
+                            <td>{{ lane.Rank }}</td>
+                            <td>{{ lane.Name }}</td>
+                            <td>{{ lane.Nationality }}</td> 
+                            <td>{{ lane.Time }} <br> {{ lane.Note }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-else>
+                    <p>No lane data available.</p>
+                </div>
+            </div>
+            <!-- Race Time Display -->
+ <!--       <div v-if="raceData.race_time" class="race_time">
+                {{ raceData.race_time }}
+            </div>  -->
+        </div>
+        <div id="app">
+            <canvas ref="canvas" :class="{ 'hidden': !isChartVisible }"></canvas>
+            <!-- Your other template content -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>

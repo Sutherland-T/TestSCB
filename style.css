@@ -1,157 +1,333 @@
-/* General styling */
-html {
-  font-size: 16px; /* setting root font-size */
-  background-color: transparent;
-}
-
 body {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
-  border: 0;
+    width: 1920px;
+    height: 1080px;
+    margin: 0 auto; /* This centers the container */
 }
 
-/* Shared styles for in_progress and #content */
-.in_progress, .in_progress #content {
-  position: relative;
-  width: 1920px;
-  height: 1080px;
+.startlist, .in_progress, .race_finish, .official, .results {
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+.startlist h1, .in_progress h1, .race_finish h1, .official h1, .results h1 {
+    font-size: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+    margin-bottom:10px;
 }
 
-/* Clock Section */
-.in_progress #raceClock {
-  background-color: rgba(139,0,0,0.9);
+.startlist h2, .in_progress h2, .race_finish h2, .official h2, .results h2 {
+    font-size: 35px;
+    height: 35px;
+    margin-top: 5px;
+    margin-bottom:5px;
+}
+
+.startlist table, .in_progress table, .race_finish table, .official table, .results table {
+    width: 100%;
+    border-collapse: separate; /* Optional, for removing space between cells */
+    border-spacing: 0px 5px;
+
+}
+
+.startlist th, .in_progress th, .race_finish th, .official th, .results th {
+    font-size: 30px;
+    line-height: 50px;
+    background-color: black;
+    color:white;
+    /* visibility: hidden; */
+
+}
+
+.startlist tr, .in_progress tr, .race_finish tr, .results tr, .official tr {
+    font-size: 30px;
+    line-height: normal;  /* Set line height to normal */
+    height: 80px;        /* Set a fixed height for each row */
+    overflow: hidden;     /* Hide overflowed content */
+    white-space: normal;  /* Allow text to wrap */
+    text-overflow: ellipsis;
+}
+
+/* Startlist Styles for the first column */
+.startlist td:nth-child(1) {
+    width: 100px; /* Width of the first column */
+    background-color: black; /* Background of the first column */
+    text-align: center; /* Text alignment for the first column */
+    color: white;
+}
+
+/* Startlist Styles for the second column */
+.startlist th:nth-child(2), .startlist td:nth-child(2) {
+    width: 1420px; /* Width of the second column */
+    text-align: left; /* Text alignment for the second column */
+    padding-left: 10px;
+}
+
+/* Startlist Styles for the third column */
+.startlist th:nth-child(3), .startlist td:nth-child(3) {
+    width: 380px; /* Width of the third column */
+    text-align: left; /* Text alignment for the third column */
+}
+
+/* Combined Styles for .in_progress and .race_finish */
+
+/* Column 1 - Center Align */
+.in_progress th:nth-child(1), .race_finish th:nth-child(1) {
+    text-align: center;
+}
+
+/* Column 2 - Left Align */
+.in_progress th:nth-child(2), .race_finish th:nth-child(2) {
+    text-align: left;
+}
+
+/* Column 3 - Left Align */
+.in_progress th:nth-child(3), .race_finish th:nth-child(3) {
+    text-align: left;
+}
+
+/* Column 4 - Left Align */
+.in_progress th:nth-child(4), .race_finish th:nth-child(4) {
+    text-align: left;
+}
+
+/* Column 5 - Left Align */
+.in_progress th:nth-child(5), .race_finish th:nth-child(5) {
+    text-align: left;
+}
+
+/* Column 6 - Center Align */
+.in_progress th:nth-child(6), .race_finish th:nth-child(6) {
+    text-align: center;
+}
+
+/* Column 1 */
+.in_progress td:nth-child(1), .race_finish td:nth-child(1) {
+    width: 100px; /* Adjust as needed */
+    background-color: black; /* Background of the first column */
+    text-align: center; /* Text alignment for the first column */
+    color: white;
+}
+
+/* Column 2 */
+.in_progress td:nth-child(2), .race_finish td:nth-child(2) {
+    width: 800px; /* Adjust as needed */
+    text-align: left; /* Text alignment for the second column */
+    padding-left: 10px;
+}
+
+/* Column 3 */
+.in_progress td:nth-child(3), .race_finish td:nth-child(3) {
+    width: 300px; /* Adjust as needed */
+    text-align: left; /* Text alignment for the third column */
+}
+
+/* Column 4 */
+.in_progress td:nth-child(4), .race_finish td:nth-child(4) {
+    width: 300px; /* Adjust as needed */
+    /* Add other styles here */
+}
+
+/* Column 5 */
+.in_progress td:nth-child(5), .race_finish td:nth-child(5) {
+    width: 300px; /* Adjust as needed */
+    /* Add other styles here */
+}
+
+/* Column 6 */
+.in_progress td:nth-child(6), .race_finish td:nth-child(6) {
+    width: 100px; /* Adjust as needed */
+    text-align: center; /* Text alignment for the first column */
+    color: black;
+}
+
+/* Styles for .official */
+
+/* Column 1 - Center Align */
+.official th:nth-child(1) {
+    text-align: center;
+}
+
+/* Column 2 - Left Align */
+.official th:nth-child(2) {
+    text-align: left;
+}
+
+/* Column 3 - Left Align */
+.official th:nth-child(3) {
+    text-align: left;
+}
+
+/* Column 4 - Left Align */
+.official th:nth-child(4) {
+    text-align: left;
+}
+
+/* Column 5 - Left Align */
+.official th:nth-child(5)  {
+    text-align: center;
+}
+
+/* Column 1 */
+.official td:nth-child(1) {
+    width: 100px; /* Adjust as needed */
+    background-color: black; /* Background of the first column */
+    text-align: center; /* Text alignment for the first column */
+    color: white;
+}
+
+/* Column 2 */
+.official td:nth-child(2) {
+    width: 1100px; /* Adjust as needed */
+    text-align: left; /* Text alignment for the second column */
+    padding-left: 10px;
+}
+
+/* Column 3 */
+.official td:nth-child(3) {
+    width: 300px; /* Adjust as needed */
+    text-align: left; /* Text alignment for the third column */
+}
+
+/* Column 4 */
+.official td:nth-child(4) {
+    width: 300px; /* Adjust as needed */
+    /* Add other styles here */
+}
+
+/* Column 5 */
+.official td:nth-child(5) {
+    width: 100px; /* Adjust as needed */
+    text-align: center; /* Text alignment for the first column */
+    color: black;
+}
+
+/* Styles for .results */
+
+/* Column 1 - Center Align */
+.results th:nth-child(1) {
+    text-align: center;
+}
+
+/* Column 2 - Left Align */
+.results th:nth-child(2) {
+    text-align: left;
+}
+
+/* Column 3 - Left Align */
+.results th:nth-child(3) {
+    text-align: left;
+}
+
+/* Column 4 - Left Align */
+.results th:nth-child(4) {
+    text-align: left;
+}
+
+/* Column 1 */
+.results td:nth-child(1) {
+    width: 15%; /* Adjust as needed */
+    text-align: center; /* Text alignment for the first column */
+    color: black;
+}
+
+/* Column 2 */
+.results td:nth-child(2) {
+    width: 35%; /* Adjust as needed */
+    text-align: left; /* Text alignment for the second column */
+    padding-left: 10px;
+}
+
+/* Column 3 */
+.results td:nth-child(3) {
+    width: 20%; /* Adjust as needed */
+    text-align: left; /* Text alignment for the third column */
+}
+
+/* Column 4 */
+.results td:nth-child(4) {
+    width:30%; /* Adjust as needed */
+    /* Add other styles here */
+}
+  
+.startlist {
+    background-color: lightblue;
+    color: black;
+    border: 2px solid navy;
+    padding: 10px;
+    margin: 10px;
+}
+
+.in_progress {
+    background-color: lightgreen;
+    color: black;
+    border: 2px solid rgb(0, 51, 0);
+    padding: 10px;
+    margin: 10px;
+}
+
+.race_finish {
+    background-color: lightcoral;
+    color: black;
+    border: 2px solid darkred;
+    padding: 10px;
+    margin: 10px;
+}
+
+.official {
+    background-color: lightyellow;
+    color: black;
+    border: 2px solid darkgoldenrod;
+    padding: 10px;
+    margin: 10px;
+}
+
+.results {
+    background-color: lightgray;
+    color: black;
+    border: 2px solid darkgrey;
+    padding: 10px;
+    margin: 10px;    
+}
+
+.race_time {
+  font-size: 50px;
   color: gold;
-  font-size: 2rem;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 900;
-  text-align: right;
-  position: absolute;
-  width: 180px;
-  bottom: 25px;
-  right: 0;
-  margin: 0 10px 0 0;
-  padding: 0 10px 0 0;
-  border-radius: 5px;
-  border: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: darkred;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
-/* Common styles for event and subtitle sections */
-.in_progress .event-class, .in_progress .subtitle-class {
-  background-color: rgba(139,0,0,0.9);
-  color: gold;
-  font-size: 1.5rem;
-  text-align: left;
-  margin: 0;
-  padding: 0 0 20px 10px;
-  width: 270px;
-  height: 25px;
+#app canvas {
+    width: 1920px !important;
+    height: 540px !important;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: white;
 }
 
-/* Border radius for event and subtitle sections */
-.in_progress .event-class {
-  border-radius: 10px 10px 0 0;
+.hidden {
+    display: none;
 }
 
-.in_progress .subtitle-class {
-  border-radius: 0 0 0 0;
+/* General styles for headings and other elements can go here 
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 50px;
 }
 
-/* Table styles for in_progress and athletesTable */
-.in_progress #athletesTable, .in_progress #athletesTable {
-  width: 280px;
-  margin: 0;
-  table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 0 10px; /* horizontal vertical */
+h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 50px;
 }
 
-/* Event wrapper styles for in_progress and event-wrapper */
-.in_progress .event-wrapper {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 270px;
-  padding: 5px;
-  margin: 0;
+div {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 40px;
 }
+*/
 
-/* Hide State */
-.in_progress #stateTitle {
-  display: none;
-}
-
-/* Common styles for table headers and cells */
-.in_progress #athletesTable th, .in_progress #athletesTable td {
-  height: 30px;
-  font-size: 1.5rem;
-  overflow: hidden;
-}
-
-/* Common styles for table headers */
-.in_progress #athletesTable th {
-  background-color: rgba(139,0,0,0.9);
-  color: gold;
-  font-size: 1.5rem;
-}
-
-/* Fixed row height for table rows */
-.in_progress #athletesTable tr {
-  height: 60px;
-}
-
-/* Column-Specific Styling */
-.in_progress .column-lane, .in_progress .column-place {
-  width: 20px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.in_progress #athletesTable tbody tr td.column-lane,
-.in_progress #athletesTable tbody tr td.column-place {
-  background-color: rgba(139,0,0,0.9);
-  color: gold;
-}
-
-/* Common styles for name, team, and time columns */
-.in_progress .column-name,
-.in_progress .column-team,
-.in_progress .column-time {
-  text-align: left;
-}
-
-.in_progress .column-name {
-  width: 100px;
-}
-
-/* New class for team column */
-.in_progress .column-team {
-  width: 100px;
-}
-
-/* New class for time column */
-.in_progress .column-time {
-  width: 90px;
-  text-align: right;
-}
-
-/* Variable Cell Colors */
-.in_progress .cell-with-variable {
-  background-color: rgba(173, 216, 230, 0.9);
-}
-
-/* Variable Cell Colors */
-.in_progress .cell-without-variable {
-  background-color: transparent;
-}
-
-/* To make the cell background transparent for the 'place' column */
-.in_progress #athletesTable tbody tr td.column-place.cell-with-variable {
-  background-color: rgba(139,0,0,0.9);
-}
-
-/* To make the cell background transparent for the 'place' column */
-.in_progress #athletesTable tbody tr td.column-place.cell-without-variable {
-  background-color: transparent;
-}
